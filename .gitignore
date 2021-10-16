@@ -1,0 +1,6 @@
+build
+bin
+*.plf
+*.elf
+*.o
+*.irobj
