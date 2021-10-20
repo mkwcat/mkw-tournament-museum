@@ -35,8 +35,8 @@
 #include <string.h>
 #include <wchar.h>
 
-#define MKWCOMP_ROOT "/mkwcomp"
-#define MKWCOMP_SAVE_ROOT MKWCOMP_ROOT "/save"
+#define MKWCOMP_ROOT "/mkwtm"
+#define MKWCOMP_SAVE_ROOT MKWCOMP_ROOT "/Save"
 
 CompFile compFileInstance;
 CompFile* CompFile::sInstance = &compFileInstance;
