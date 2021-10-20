@@ -1,5 +1,5 @@
 PAL	USA	JAP	KOR	Symbol
-8062c3a4	805fb4f0	8062bcf0	8061a79c	Patch_SceneBuildPages
+8062c3a4	805fb4f0	8062baf0	8061a79c	Patch_SceneBuildPages
 80630094	805ff1e0	8062f7e0	8061e48c	Patch_SceneShowBasePages
 806316c4	80600810	80630e10	8061fabc	Patch_MainMenuKind
 80631a58	80600ba4	806311a4	8061fe50	Patch_SceneHasBackModel
