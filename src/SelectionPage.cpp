@@ -168,6 +168,8 @@ void SelectionPage::updateCompetitionName()
 
         m_compName.setMessage("mode_text", 0x27F2, 0);
         m_compName.setMessage("mode_text_shadow", 0x27F2, 0);
+
+        m_compName.setTexture("course_bg", "comp_settings");
         return;
     }
     if (m_selectedCompId == -100)
