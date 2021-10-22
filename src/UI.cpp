@@ -22,6 +22,7 @@
 
 #include "UI.h"
 #include "ForcedHandleBypassPage.h"
+#include "NewTitleScreenPage.h"
 #include "RaceMenu.h"
 #include "Replay.h"
 #include "SaveManagerPage.h"
@@ -33,7 +34,6 @@
 #include <mkw/RKContext.h>
 #include <mkw/Sound.h>
 #include <mkw/UI/PushButton.h>
-#include <mkw/UI/TitleScreenPage.h>
 #include <mkw/UI/UIPage.h>
 #include <mkw/UI/UIPageManager.h>
 
@@ -472,8 +472,7 @@ void buildPagesReplace(UI::UIPageManager* scene, int id)
         scene->buildPage(0x5E);
         scene->buildPage(0x65);
         {
-            UI::TitleScreenPage* page = new UI::TitleScreenPage();
-            page->hideBackground(true);
+            NewTitleScreenPage* page = new NewTitleScreenPage();
             scene->setPage(0x57, page);
             page->init(0x57);
         }
@@ -2742,6 +2741,7 @@ void initMenu()
     }
 
     ForcedHandleBypassPage::staticInit();
+    NewTitleScreenPage::staticInit();
     SettingsPage::staticInit();
     initRaceMenu();
 
