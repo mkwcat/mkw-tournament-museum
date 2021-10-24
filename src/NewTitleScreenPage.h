@@ -22,6 +22,8 @@
 
 #pragma once
 #include <RuntimeTypeInfo.h>
+#include <mkw/UI/CtrlMenuPageTitleText.h>
+#include <mkw/UI/LayoutUIControl.h>
 #include <mkw/UI/TitleScreenPage.h>
 #include <mkw/UI/UIPage.h>
 
@@ -48,6 +50,9 @@ public:
     virtual void _44()
     {
     }
+
+    UI::LayoutUIControl m_logo;
+    UI::CtrlMenuPageTitleText m_titleText;
 
     static void staticInit();
 };

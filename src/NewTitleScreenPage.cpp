@@ -30,12 +30,21 @@ void NewTitleScreenPage::onInit()
     m_inputs.init(0, 0);
     setInputManager(&m_inputs);
 
-    initControlGroup(2);
+    initControlGroup(3);
 
     setControl(0, &m_pressStart, 0);
     m_pressStart.initLayout();
 
-    setControl(1, &m_background, 0);
+    setControl(1, &m_logo, 0);
+    UI::CtrlRes ctrl(&m_logo);
+    ctrl.readFile("title", "TitleLogo", "TitleLogo", nullptr);
+
+    setControl(2, &m_titleText, 0);
+    m_titleText.initLayout(0);
+    m_titleText.setMessage(0x27F2, nullptr);
+
+    m_pressStart.m_useTransAnim = true;
+    m_pressStart.m_transDelay = 2;
 }
 
 extern Instruction<1> Patch_TitleScreenOnIn;

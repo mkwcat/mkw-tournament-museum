@@ -21,9 +21,9 @@
 // SOFTWARE.
 
 #pragma once
+#include "CtrlMenuPressStart.h"
 #include "LayoutUIControl.h"
 #include "UIInputManager.h"
-#include "CtrlMenuPressStart.h"
 #include "UIPage.h"
 #include <RuntimeTypeInfo.h>
 #include <rvl/types.h>
@@ -69,7 +69,7 @@ public:
 protected:
     /* 0x044 */ UIInputManager m_inputs;
     /* 0x054 */ CtrlMenuPressStart m_pressStart;
-    /* 0x1C8 */ LayoutUIControl m_background;
+    /* 0x1C8 */ LayoutUIControl m_background; // actually "TitleImage"
     /* 0x33C */ u32 unk_0x33C;
     /* 0x340 */ int m_nextPage;
     /* 0x344 */ u32 unk_0x344;
