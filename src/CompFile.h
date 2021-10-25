@@ -139,7 +139,7 @@ public:
     void readFile();
     void setupLeaderboard();
     void getSaveDataPath(char* path);
-    void getGhostDataPath(char* path, u32 num);
+    void getGhostDataPath(char* path, u32 num, bool restrictMii);
     void getGhostDataDir(char* path, int compId);
     void openSaveFile();
     bool readSaveFile();
@@ -147,6 +147,7 @@ public:
     void writeSaveTask();
     CompSaveFile::Data* getLicenseSaveData();
     void setText(const wchar_t* title, const wchar_t* explanation);
+    bool createGhostFile();
     void writeGhostDataTask();
     bool shouldGhostSave(GhostData::RaceTime* time);
 

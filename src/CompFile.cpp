@@ -284,11 +284,31 @@ static char getFilenameChar(wchar_t wc)
     }
 }
 
-void CompFile::getGhostDataPath(char* path, u32 num)
+// Restrict to a limited number of characters
+static char getFilenameCharRestricted(wchar_t wc)
+{
+    switch (wc) {
+    case 'A' ... 'Z':
+    case 'a' ... 'z':
+    case '0' ... '9':
+    case '-':
+    case '_':
+    case '\'':
+        return (char)wc;
+
+    default:
+        return '_';
+    }
+}
+
+void CompFile::getGhostDataPath(char* path, u32 num, bool restrictMii)
 {
     char asciiMiiName[10];
     for (int i = 0; i < 10; i++) {
-        asciiMiiName[i] = getFilenameChar(m_ghost.m_mii.name[i]);
+        if (!restrictMii)
+            asciiMiiName[i] = getFilenameChar(m_ghost.m_mii.name[i]);
+        else
+            asciiMiiName[i] = getFilenameCharRestricted(m_ghost.m_mii.name[i]);
         if (asciiMiiName[i] == 0)
             break;
     }
@@ -323,6 +343,35 @@ void CompFile::getGhostDataDir(char* path, int compId)
     snprintf(path, 128, "%s/comp%02u", savePathRoot(), compId);
 }
 
+bool CompFile::createGhostFile()
+{
+    for (u32 num = 0;; num++) {
+        getGhostDataPath(m_ghostPath, num, false);
+        bool ret = m_file->open(m_ghostPath, NAND_MODE_READ);
+        if (!ret)
+            break;
+        m_file->close();
+    }
+
+    bool ret = m_file->openCreate(m_ghostPath, NAND_MODE_WRITE);
+
+    if (ret)
+        return true;
+
+    // For a file to fail creation, it might be because there is an invalid
+    // character in the mii name.
+
+    for (u32 num = 0;; num++) {
+        getGhostDataPath(m_ghostPath, num, true);
+        bool ret = m_file->open(m_ghostPath, NAND_MODE_READ);
+        if (!ret)
+            break;
+        m_file->close();
+    }
+
+    return m_file->openCreate(m_ghostPath, NAND_MODE_WRITE);
+}
+
 void CompFile::writeGhostDataTask()
 {
     m_ghostDataStatus = SAVE_WAITING;
@@ -344,15 +393,7 @@ void CompFile::writeGhostDataTask()
     }
 #endif
 
-    for (u32 num = 0;; num++) {
-        getGhostDataPath(m_ghostPath, num);
-        bool ret = m_file->open(m_ghostPath, NAND_MODE_READ);
-        if (!ret)
-            break;
-        m_file->close();
-    }
-
-    bool ret = m_file->openCreate(m_ghostPath, NAND_MODE_WRITE);
+    bool ret = createGhostFile();
 
     if (!ret) {
         OSReport("Failed to open ghost file\n");
