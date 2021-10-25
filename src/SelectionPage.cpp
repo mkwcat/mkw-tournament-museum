@@ -166,8 +166,8 @@ void SelectionPage::updateCompetitionName()
         m_compName.setMessage("text", 0x1B58, 0);
         m_compName.setMessage("text_shadow", 0x1B58, 0);
 
-        m_compName.setMessage("mode_text", 0x27F2, 0);
-        m_compName.setMessage("mode_text_shadow", 0x27F2, 0);
+        m_compName.setMessage("mode_text", 0x27F3, 0);
+        m_compName.setMessage("mode_text_shadow", 0x27F3, 0);
 
         m_compName.setTexture("course_bg", "comp_settings");
         return;
