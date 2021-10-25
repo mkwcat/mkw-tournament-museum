@@ -194,6 +194,7 @@ public:
     s32 m_saveFsError;
     SaveError m_ghostDataStatus;
     s32 m_ghostFsError;
+    char m_ghostPath[128];
 
     int m_compId;
     bool m_isFileAvailable;

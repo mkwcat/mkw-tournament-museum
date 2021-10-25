@@ -25,6 +25,7 @@
 #include "CompFile.h"
 #include <mkw/UI/UIPageManager.h>
 #include <rvl/os.h>
+#include <stdio.h>
 
 TYPEINFO_DERIVED(SaveManagerPage, UI::UIPage);
 
@@ -61,13 +62,29 @@ void SaveManagerPage::onDeinit()
 
     if (CompFile::sInstance->m_saveDataStatus != CompFile::SAVE_OK ||
         CompFile::sInstance->m_ghostDataStatus != CompFile::SAVE_OK) {
-        // TODO: transition to a "save corrupted" screen
-        OSReport("SaveManagerPage: m_saveDataStatus: %d, m_saveFsError: %d\n"
-                 "                 m_ghostDataStatus: %d, m_ghostFsError: %d\n",
+        // TODO: transition to a "save corrupted" screen in the normal UI system
+
+        char msg[256];
+
+        snprintf(msg, 256,
+                 "---- MKWTM ERROR ----\n"
+                 "A save data error has occurred.\n"
+                 "Error info:\n"
+                 "   m_saveDataStatus: %d\n"
+                 "   m_saveFsError: %d\n"
+                 "   m_ghostDataStatus: %d\n"
+                 "   m_ghostFsError: %d\n"
+                 "   m_ghostPath: %.128s\n",
                  CompFile::sInstance->m_saveDataStatus,
                  CompFile::sInstance->m_saveFsError,
                  CompFile::sInstance->m_ghostDataStatus,
-                 CompFile::sInstance->m_ghostFsError);
+                 CompFile::sInstance->m_ghostFsError,
+                 CompFile::sInstance->m_ghostPath);
+
+        u32 textColor = 0xFFFFFFFF;
+        u32 bgColor = 0x000000FF;
+        OSFatal(&textColor, &bgColor, msg);
+
         while (1) {
         }
     }

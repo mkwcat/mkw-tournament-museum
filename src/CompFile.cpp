@@ -327,15 +327,13 @@ void CompFile::writeGhostDataTask()
 {
     m_ghostDataStatus = SAVE_WAITING;
 
-    char path[128];
-
 #ifdef DOLPHIN_GHOSTS
     if (isRiivolution()) {
 #endif
-        getGhostDataDir(path, m_compId);
+        getGhostDataDir(m_ghostPath, m_compId);
 
-        if (!RiivoFS::sInstance->dirExists(path)) {
-            s32 ret = RiivoFS::sInstance->createDir(path);
+        if (!RiivoFS::sInstance->dirExists(m_ghostPath)) {
+            s32 ret = RiivoFS::sInstance->createDir(m_ghostPath);
             if (ret < 0) {
                 m_ghostFsError = ret;
                 m_ghostDataStatus = SAVE_EIPC;
@@ -347,14 +345,14 @@ void CompFile::writeGhostDataTask()
 #endif
 
     for (u32 num = 0;; num++) {
-        getGhostDataPath(path, num);
-        bool ret = m_file->open(path, NAND_MODE_READ);
+        getGhostDataPath(m_ghostPath, num);
+        bool ret = m_file->open(m_ghostPath, NAND_MODE_READ);
         if (!ret)
             break;
         m_file->close();
     }
 
-    bool ret = m_file->openCreate(path, NAND_MODE_WRITE);
+    bool ret = m_file->openCreate(m_ghostPath, NAND_MODE_WRITE);
 
     if (!ret) {
         OSReport("Failed to open ghost file\n");
