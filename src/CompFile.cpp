@@ -293,9 +293,25 @@ void CompFile::getGhostDataPath(char* path, u32 num)
             break;
     }
 
+#ifdef DOLPHIN_GHOSTS
+    if (!isRiivolution()) {
+        // Wont save on real console because the filename is greater than 12
+        // characters
+        const char* format = num == 0
+                                 ? "%s/comp%02u - %02um%02us%03um.rkg"
+                                 : "%s/comp%02u - %02um%02us%03um - %u.rkg";
+
+        snprintf(path, 128, format, savePathRoot(), m_compId,
+                 m_ghost.m_finishTime.minutes, m_ghost.m_finishTime.seconds,
+                 m_ghost.m_finishTime.milliseconds, num);
+        return;
+    }
+#endif
+
     const char* format =
         num == 0 ? "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um.rkg"
                  : "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um - %u.rkg";
+
     snprintf(path, 128, format, savePathRoot(), m_compId, m_compId,
              asciiMiiName, m_ghost.m_finishTime.minutes,
              m_ghost.m_finishTime.seconds, m_ghost.m_finishTime.milliseconds,
@@ -312,16 +328,23 @@ void CompFile::writeGhostDataTask()
     m_ghostDataStatus = SAVE_WAITING;
 
     char path[128];
-    getGhostDataDir(path, m_compId);
 
-    if (!RiivoFS::sInstance->dirExists(path)) {
-        s32 ret = RiivoFS::sInstance->createDir(path);
-        if (ret < 0) {
-            m_ghostFsError = ret;
-            m_ghostDataStatus = SAVE_EIPC;
-            return;
+#ifdef DOLPHIN_GHOSTS
+    if (isRiivolution()) {
+#endif
+        getGhostDataDir(path, m_compId);
+
+        if (!RiivoFS::sInstance->dirExists(path)) {
+            s32 ret = RiivoFS::sInstance->createDir(path);
+            if (ret < 0) {
+                m_ghostFsError = ret;
+                m_ghostDataStatus = SAVE_EIPC;
+                return;
+            }
         }
+#ifdef DOLPHIN_GHOSTS
     }
+#endif
 
     for (u32 num = 0;; num++) {
         getGhostDataPath(path, num);
@@ -595,8 +618,10 @@ void makeGhostUserData(wchar_t* userData)
 
 void saveTournamentGhost(u8* r3, int r4, int r5, GhostData* ghost)
 {
+#ifndef DOLPHIN_GHOSTS
     if (!isRiivolution())
         return;
+#endif
     if (!ghost->m_valid)
         return;
     if (!CompFile::sInstance->shouldGhostSave(&ghost->m_finishTime))
