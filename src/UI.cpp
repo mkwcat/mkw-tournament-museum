@@ -2686,6 +2686,11 @@ s32 sceneGetBGMGroupReplace(int id)
     }
 }
 
+static bool returnTrue()
+{
+    return true;
+}
+
 asm void bgUnloadSoundFix()
 {
     // clang-format off
@@ -2722,6 +2727,8 @@ extern Instruction<1> Patch_MainMenuKind;
 extern Instruction<1> Patch_SceneGetBGM;
 extern Instruction<1> Patch_SceneGetBGMGroup;
 extern Instruction<1> Patch_LicenseSelect;
+extern Instruction<1> Patch_CharacterSelectUnlock;
+extern Instruction<1> Patch_VehicleSelectUnlock;
 extern Instruction<1> Patch_BGUnloadSoundFix;
 
 extern Instruction<6> Patch_EventExplanationPage_Events;
@@ -2752,6 +2759,9 @@ void initMenu()
     Patch_MainMenuKind.flush();
 
     Patch_LicenseSelect.setBL(patchLicenseSelectGetNextScene);
+
+    Patch_CharacterSelectUnlock.setB(returnTrue);
+    Patch_VehicleSelectUnlock.setB(returnTrue);
 
     Patch_BGUnloadSoundFix.setBL(bgUnloadSoundFix);
 
