@@ -20,6 +20,7 @@ PAL	USA	JAP	KOR	Symbol
 8081cfb4	8080a208	8081c620	8080b374	Patch_VehicleSelectUnlock
 80622208	805f1354	80621954	80610600	Patch_BGUnloadSoundFix
 8063adc8	80609a28	8063a4b4	80629160	Patch_TitleScreenOnIn
+8063b04c	80609cac	8063a738	806293e4	Patch_TitleScreenToOut
 8085783c	80835dac	80856ea8	80845bfc	Patch_ControlKindCheck_RaceFinishReset
 808569bc	80834f2c	80856028	80844d7c	Patch_ControlKindCheck_onPause
 80859ec4	80838434	80859530	80848284	Patch_ControlKindCheck_PauseUpdate

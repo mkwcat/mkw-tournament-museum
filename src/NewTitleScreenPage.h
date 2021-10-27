@@ -38,6 +38,9 @@ public:
     }
 
     virtual void onInit();
+    virtual void onIn();
+    virtual void onUpdateBegin();
+
     virtual void _38()
     {
     }
@@ -52,7 +55,8 @@ public:
     }
 
     UI::LayoutUIControl m_logo;
-    UI::CtrlMenuPageTitleText m_titleText;
+    bool m_overlayFade;
+    int m_overlayFadeFrame;
 
     static void staticInit();
 };

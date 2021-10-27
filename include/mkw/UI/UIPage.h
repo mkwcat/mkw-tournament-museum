@@ -78,7 +78,6 @@ public:
 
     void setInputManager(UIInputManager*);
 
-protected:
     s32 m_pageId;
     u32 m_8;
     bool m_C;
