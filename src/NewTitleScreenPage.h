@@ -55,6 +55,7 @@ public:
     }
 
     UI::LayoutUIControl m_logo;
+    UI::LayoutUIControl m_copyright;
     bool m_overlayFade;
     int m_overlayFadeFrame;
 

@@ -32,21 +32,28 @@ void NewTitleScreenPage::onInit()
     m_inputs.init(0, 0);
     setInputManager(&m_inputs);
 
-    initControlGroup(2);
+    initControlGroup(3);
 
     setControl(0, &m_pressStart, 0);
     m_pressStart.initLayout();
 
-    setControl(1, &m_logo, 0);
-    UI::CtrlRes ctrl(&m_logo);
-    ctrl.readFile("title", "TitleLogo", "TitleLogo", nullptr);
+    {
+        setControl(1, &m_logo, 0);
+        UI::CtrlRes ctrl(&m_logo);
+        ctrl.readFile("title", "TitleLogo", "TitleLogo", nullptr);
+    }
+    {
+        setControl(2, &m_copyright, 0);
+        UI::CtrlRes ctrl(&m_copyright);
+        ctrl.readFile("title", "Copyright", "Copyright", nullptr);
+    }
 
     m_pressStart.m_useTransAnim = true;
     m_pressStart.m_transDelay = 2;
 }
 
 // Menu overlay fade
-const int sFadeFrameCount = 8;
+const int sFadeFrameCount = 10;
 
 void NewTitleScreenPage::onIn()
 {
