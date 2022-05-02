@@ -5,7 +5,7 @@ TARGET := loader
 # Compiler definitions
 CC := mwcceppc
 LD := mwldeppc
-OBJCOPY := powerpc-eabi-objcopy
+OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 
 SOURCES := loader.cpp
 INCLUDE := ../include

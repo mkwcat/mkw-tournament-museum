@@ -6,7 +6,7 @@ SYMBOLS_OUT := $(TARGET)_P.rel.lst $(TARGET)_E.rel.lst $(TARGET)_J.rel.lst $(TAR
 
 # Compiler definitions
 CC := mwcceppc
-LD := powerpc-eabi-ld
+LD := $(DEVKITPPC)/bin/powerpc-eabi-ld
 LSTGEN := lstgen.py
 ELF2REL := ../elf2rel/elf2rel.exe
 
