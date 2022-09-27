@@ -6,7 +6,7 @@ DUMMY != mkdir -p $(BIN)
 default:
 	@$(MAKE) --no-print-directory -C loader
 	cp loader/build/loader.bin $(BIN)/loader.bin
-	@$(MAKE) --no-print-directory -C src
+	@$(MAKE) --no-print-directory -C src -f ../Makefile_CW.mk
 	cp src/build/$(MKWTM)_P.rel $(BIN)/$(MKWTM)_P.rel
 	cp src/build/$(MKWTM)_E.rel $(BIN)/$(MKWTM)_E.rel
 	cp src/build/$(MKWTM)_J.rel $(BIN)/$(MKWTM)_J.rel

@@ -23,6 +23,7 @@
 #include "Replay.h"
 #include "patch.h"
 #include "util.h"
+#include <asm.h>
 #include <mkw/MenuSet.h>
 
 // in MenuSet::RaceSetting modeFlags, new bit flag!
@@ -58,96 +59,73 @@ void setupNextRaceInputHook(MenuSet::RaceSetting* nextRace,
     nextRace->setupNextRaceInput(lastRace);
 }
 
-asm void controlKindCheck_RaceFinishReset()
-{
-    // clang-format off
-    nofralloc
+// clang-format off
+ASM_FUNCTION(void controlKindCheck_RaceFinishReset(),  
+    cmpwi   R0, 1;
+    beqlr-;
 
-    cmpwi   r0, 1
-    beqlr-
+    mflr    R28;
+    bl      isTournamentReplay;
+    mtlr    R28;
 
-    mflr    r28
-    bl      isTournamentReplay
-    mtlr    r28
+    cmpwi   R3, 1;
+    blr;
+)
 
-    cmpwi   r3, 1
-    blr
-    // clang-format on
-}
-
-asm void controlKindCheck_PauseBeforeStart()
-{
-    // clang-format off
-    nofralloc
-
+ASM_FUNCTION(void controlKindCheck_PauseBeforeStart(),
     // r0 is controlKind
-    cmpwi   r0, 1
-    beqlr-
+    cmpwi   R0, 1;
+    beqlr-;
 
     // modeFlags
-    lwz     r0, 0x20 + 0xB70(r4)
-    xori    r0, r0, FLAG_REPLAY
-    rlwinm. r0, r0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT
+    lwz     R0, 0x20 + 0xB70(R4);
+    xori    R0, R0, FLAG_REPLAY;
+    rlwinm. R0, R0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT;
 
-    blr
-    // clang-format on
-}
+    blr;
+)
 
-asm void controlKindCheck_PauseMenuFreeze()
-{
-    // clang-format off
-    nofralloc
-
+ASM_FUNCTION(void controlKindCheck_PauseMenuFreeze(),
     // r0 is controlKind
-    cmpwi   r0, 0
-    bnelr-
+    cmpwi   R0, 0;
+    bnelr-;
 
     // modeFlags
-    lwz     r0, 0x20 + 0xB70(r3)
-    rlwinm. r0, r0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT
+    lwz     R0, 0x20 + 0xB70(R3);
+    rlwinm. R0, R0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT;
 
-    blr
-    // clang-format on
-}
+    blr;
+)
 
-asm void controlKindCheck_PauseUpdate()
-{
-    // clang-format off
-    nofralloc
-
+ASM_FUNCTION(void controlKindCheck_PauseUpdate(),
     // r0 is controlKind
-    cmpwi   r0, 1
-    beqlr-
+    cmpwi   R0, 1;
+    beqlr-;
 
     // modeFlags
-    lwz     r0, 0x20 + 0xB70(r3)
-    xori    r0, r0, FLAG_REPLAY
-    rlwinm. r0, r0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT
+    lwz     R0, 0x20 + 0xB70(R3);
+    xori    R0, R0, FLAG_REPLAY;
+    rlwinm. R0, R0, 0, FLAG_REPLAY_BIT, FLAG_REPLAY_BIT;
 
-    blr
-    // clang-format on
-}
+    blr;
+)
 
-asm void replayRearviewPatch()
-{
-    // clang-format off
-    nofralloc
-
-    lis     r8, sInstance__7MenuSet@ha
-    lwz     r8, sInstance__7MenuSet@l(r8)
+ASM_FUNCTION(void replayRearviewPatch(),
+    lis     R8, sInstance__7MenuSet@ha;
+    lwz     R8, sInstance__7MenuSet@l(R8);
     // modeFlags & tournament bit
-    lwz     r8, 0x20 + 0xB70(r8)
-    rlwinm. r8, r8, 0, 29, 29
+    lwz     R8, 0x20 + 0xB70(R8);
+    rlwinm. R8, R8, 0, 29, 29;
 
     // exclude rearview mirror bit
-    rlwinm  r4, r0, 0, 27, 31
-    beqlr
+    rlwinm  R4, R0, 0, 27, 31;
+    beqlr;
 
     // include bit
-    rlwinm  r4, r0, 0, 26, 31
-    blr
-    // clang-format on
-}
+    rlwinm  R4, R0, 0, 26, 31;
+    blr;
+)
+// clang-format on
 
 extern Instruction<1> Patch_ControlKindCheck_RaceFinishReset;
 extern Instruction<110> Patch_ControlKindCheck_onPause;

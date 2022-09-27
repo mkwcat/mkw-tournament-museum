@@ -37,6 +37,7 @@ public:
 
     u8 fill2[0x78];
 };
+static_assert(sizeof(ButtonInputBase) == 0x84, "sizeof(ButtonInputBase) != 0x84");
 
 class PushButton : public LayoutUIControl
 {
@@ -72,7 +73,7 @@ public:
     /* 0x238 */ Function<PushButton*, int> mf_onSelectToFree;
     /* 0x23C */ Function<PushButton*, int> mf_onSelect;
 
-    /* 0x240 */ u32 m_id;
+    /* 0x240 */ s32 m_id;
     /* 0x244 */ int m_selectable;
 
     /* 0x248 */ void* m_somePane;
@@ -80,7 +81,6 @@ public:
 
     /* 0x250 */ s32 m_selectSoundId;
 };
-
 static_assert(sizeof(PushButton) == 0x254, "sizeof(PushButton) != 0x254");
 
 } // namespace UI

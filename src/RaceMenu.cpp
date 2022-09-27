@@ -29,6 +29,7 @@
 #include <mkw/UI/RaceHudPage.h>
 #include <mkw/UI/RaceMenuPage.h>
 #include <mkw/UI/UIPage.h>
+#include <asm.h>
 
 const int sEndScreenButtons[5] = {
     UI::RaceMenu::ButtonRestart,       UI::RaceMenu::ButtonChangeCharacter,
@@ -212,38 +213,31 @@ void buildTournamentReplayPages(UI::UIPageManager* scene)
     }
 }
 
-asm void hudWatchReplayHook()
-{
+ASM_FUNCTION(void hudWatchReplayHook(),
     // clang-format off
-    nofralloc
+    li      R4, -1;
 
-    li      r4, -1
+    cmpwi   R0, 0x2D;
+    bnelr;
 
-    cmpwi   r0, 0x2D
-    bnelr
-
-    li      r4, TOURNAMENT_SCENE_ID
-    blr
+    li      R4, TOURNAMENT_SCENE_ID;
+    blr;
     // clang-format on
-}
+)
 
-asm void hudQuitReplayHook()
-{
-    // clang-format off
-    nofralloc
-
+ASM_FUNCTION(void hudQuitReplayHook(),
     // case 0x2F
-    li      r4, 0x21
-    beqlr-
+    li      R4, 0x21;
+    beqlr-;
 
-    cmpwi   r0, TOURNAMENT_SCENE_ID
-    li      r4, 0x26
-    beqlr-
+    cmpwi   R0, TOURNAMENT_SCENE_ID;
+    li      R4, 0x26;
+    beqlr-;
 
-    li      r4, -1
-    blr
+    li      R4, -1;
+    blr;
     // clang-format on
-}
+)
 
 int resultMusicHook(int bgmId)
 {

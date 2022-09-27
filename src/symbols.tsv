@@ -117,6 +117,7 @@ PAL	USA	JAP	KOR	Symbol
 806f90b8	806f40fc	806f8724	806e7460	enableBGMPersist__Q22UI18SceneBGMControllerFv
 805eeb68	805d4094	805ee444	805dcf88	__ct__Q22UI14UIInputManagerFv
 805eeb8c	805d40b8	805ee468	805dcfac	__dt__Q22UI14UIInputManagerFv
+805eebcc	805d40f8	805ee4a8	805dcfec	init__Q22UI14UIInputManagerFii
 805f09a8	805d5ed4	805f0284	805dedc8	__ct__Q22UI18UIInputManagerMenuFv
 805f0bd4	805d6100	805f04b0	805deff4	__dt__Q22UI18UIInputManagerMenuFv
 805f0db4	805d62e0	805f0690	805df1d4	setScreenWrapSetting__Q22UI18UIInputManagerMenuFi

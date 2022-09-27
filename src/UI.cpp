@@ -30,6 +30,7 @@
 #include "SettingsPage.h"
 #include "patch.h"
 #include "util.h"
+#include <asm.h>
 #include <mkw/MenuSet.h>
 #include <mkw/RKContext.h>
 #include <mkw/Sound.h>
@@ -2691,35 +2692,27 @@ static bool returnTrue()
     return true;
 }
 
-asm void bgUnloadSoundFix()
-{
-    // clang-format off
-    nofralloc
+// clang-format off
+ASM_FUNCTION(void bgUnloadSoundFix(),
+    lwz     R3, 0x354(R3);
+    li      R0, 0;
+    stw     R0, 0x10(R3);
+    blr;
+)
 
-    lwz     r3, 0x354(r3)
-    li      r0, 0
-    stw     r0, 0x10(r3)
-    blr
-    // clang-format on
-}
-
-const float defaultValues[2] = {0.6, 0.65};
-asm void fix2DMapCharaSize()
-{
-    // clang-format off
-    nofralloc
-
-    lis r6, defaultValues@ha
-    lfsu f0, defaultValues@l(r6)
-    stfs f0, 0x18(r31)
-    lfs f0, 4(r6)
-    stfs f0, 0x1C(r31)
+float defaultValues[2] = {0.6, 0.65};
+ASM_FUNCTION(void fix2DMapCharaSize(),
+    lis     R6, defaultValues@ha;
+    lfsu    F0, defaultValues@l(R6);
+    stfs    F0, 0x18(R31);
+    lfs     F0, 4(R6);
+    stfs    F0, 0x1C(R31);
 
     // Original instruction
-    cmpwi r0, 2
-    blr
-    // clang-format on
-}
+    cmpwi   R0, 2;
+    blr;
+)
+// clang-format on
 
 extern Instruction<1> Patch_SceneBuildPages;
 extern Instruction<1> Patch_SceneShowBasePages;

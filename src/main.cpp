@@ -26,7 +26,7 @@
 #include "UI.h"
 #include "util.h"
 
-void main()
+void MKWTMMain()
 {
     initMenu();
     initReplayMode();

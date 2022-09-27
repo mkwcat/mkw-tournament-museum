@@ -3,21 +3,25 @@
 
 SECTIONS {
 	.text : {
-		*(.text)
+		*(.text*)
 	}
 	.rodata : {
-		*(.rodata)
+		*(.rodata*)
 	}
 	.data : {
 		*(.data)
+		*(.sdata)
+		*(.sdata2)
 	}
 	.bss : {
-		*(.bss)
+		*(.bss*)
+		*(.sbss*)
 	}
 	
 	.ctors : {
 		_ctors = .;
 		*(.ctors)
+		*(.init_array)
 		_ctors_end = .;
 	}
 }

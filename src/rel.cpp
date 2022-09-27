@@ -29,8 +29,10 @@ __attribute__((section(".ctors"))) extern PFN_voidfunc _ctors_end[];
 void _prolog();
 void _epilog();
 void _unresolved();
-void main();
+
 }
+
+void MKWTMMain();
 
 __declspec(noinline) void _prolog()
 {
@@ -40,7 +42,7 @@ __declspec(noinline) void _prolog()
     }
 
     // Run main
-    main();
+    MKWTMMain();
 }
 
 __declspec(noinline) void _epilog()
@@ -54,3 +56,10 @@ __declspec(noinline) void _unresolved()
     // Infinite loop
     _unresolved();
 }
+
+#ifdef __clang__
+int __dso_handle;
+extern "C" void __cxa_atexit()
+{
+}
+#endif
