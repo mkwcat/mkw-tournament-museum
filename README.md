@@ -11,6 +11,11 @@ To compile code you'll need:
     ['available on the Internet Archive'][cwIA].
   - After installing it, you need `license.dat` from the installation root,
     and the DLL and EXE files inside `PowerPC_EABI_Tools/Command_Line_Tools`.
+  - If you get a license error for `Win32_Plugins_Link_PPC`, add the
+    following text to the end of the `license.dat` file:
+    ```
+    FEATURE Win32_Plugins_Link_PPC metrowks 8.0 permanent uncounted B08D7CC7D735 HOSTID=ANY
+    ```
   - Useful documentation is in `Help/Power_Arch_Build_Tools_Reference.chm`
     (or `Help/PDF/Power Architecture Build Tools Reference.pdf`)
 
