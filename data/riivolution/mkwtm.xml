@@ -1,0 +1,89 @@
+<wiidisc version="1">
+	<id game="RMC" />
+	<options>
+		<section name="Tournament Museum">
+			<option name="Tournament Museum">
+				<choice name="Enabled">
+					<patch id="mkwtm" />
+				</choice>
+			</option>
+		</section>
+	</options>
+	<patch id="mkwtm">
+		<!--Tournaments-->
+		<folder disc="/Race/Competition" external="/mkwtm/Comp" create="true" />
+
+		<!--UI-->
+		<file disc="/Scene/UI/Event.szs" external="/mkwtm/UI/Event.szs" />
+		<file disc="/Scene/UI/Event_R.szs" external="/mkwtm/UI/Event.szs" />
+		<file disc="/Scene/UI/Event_E.szs" external="/mkwtm/UI/Message_E.szs" />
+		<file disc="/Scene/UI/Event_F.szs" external="/mkwtm/UI/Message_F.szs" />
+		<file disc="/Scene/UI/Event_G.szs" external="/mkwtm/UI/Message_G.szs" />
+		<file disc="/Scene/UI/Event_I.szs" external="/mkwtm/UI/Message_I.szs" />
+		<file disc="/Scene/UI/Event_J.szs" external="/mkwtm/UI/Message_J.szs" />
+		<file disc="/Scene/UI/Event_K.szs" external="/mkwtm/UI/Message_K.szs" />
+		<file disc="/Scene/UI/Event_M.szs" external="/mkwtm/UI/Message_M.szs" />
+		<file disc="/Scene/UI/Event_Q.szs" external="/mkwtm/UI/Message_Q.szs" />
+		<file disc="/Scene/UI/Event_S.szs" external="/mkwtm/UI/Message_S.szs" />
+		<file disc="/Scene/UI/Event_U.szs" external="/mkwtm/UI/Message_U.szs" />
+		
+		<file disc="/Scene/UI/MenuOther_E.szs" external="/mkwtm/UI/Message_E.szs" />
+		<file disc="/Scene/UI/MenuOther_F.szs" external="/mkwtm/UI/Message_F.szs" />
+		<file disc="/Scene/UI/MenuOther_G.szs" external="/mkwtm/UI/Message_G.szs" />
+		<file disc="/Scene/UI/MenuOther_I.szs" external="/mkwtm/UI/Message_I.szs" />
+		<file disc="/Scene/UI/MenuOther_J.szs" external="/mkwtm/UI/Message_J.szs" />
+		<file disc="/Scene/UI/MenuOther_K.szs" external="/mkwtm/UI/Message_K.szs" />
+		<file disc="/Scene/UI/MenuOther_M.szs" external="/mkwtm/UI/Message_M.szs" />
+		<file disc="/Scene/UI/MenuOther_Q.szs" external="/mkwtm/UI/Message_Q.szs" />
+		<file disc="/Scene/UI/MenuOther_S.szs" external="/mkwtm/UI/Message_S.szs" />
+		<file disc="/Scene/UI/MenuOther_U.szs" external="/mkwtm/UI/Message_U.szs" />
+		
+		<file disc="/Scene/UI/Channel_E.szs" external="/mkwtm/UI/Message_E.szs" />
+		<file disc="/Scene/UI/Channel_F.szs" external="/mkwtm/UI/Message_F.szs" />
+		<file disc="/Scene/UI/Channel_G.szs" external="/mkwtm/UI/Message_G.szs" />
+		<file disc="/Scene/UI/Channel_I.szs" external="/mkwtm/UI/Message_I.szs" />
+		<file disc="/Scene/UI/Channel_J.szs" external="/mkwtm/UI/Message_J.szs" />
+		<file disc="/Scene/UI/Channel_K.szs" external="/mkwtm/UI/Message_K.szs" />
+		<file disc="/Scene/UI/Channel_M.szs" external="/mkwtm/UI/Message_M.szs" />
+		<file disc="/Scene/UI/Channel_Q.szs" external="/mkwtm/UI/Message_Q.szs" />
+		<file disc="/Scene/UI/Channel_S.szs" external="/mkwtm/UI/Message_S.szs" />
+		<file disc="/Scene/UI/Channel_U.szs" external="/mkwtm/UI/Message_U.szs" />
+		
+		<file disc="/Scene/UI/Race_E.szs" external="/mkwtm/UI/Race_E.szs" />
+		<file disc="/Scene/UI/Race_F.szs" external="/mkwtm/UI/Race_F.szs" />
+		<file disc="/Scene/UI/Race_G.szs" external="/mkwtm/UI/Race_G.szs" />
+		<file disc="/Scene/UI/Race_I.szs" external="/mkwtm/UI/Race_I.szs" />
+		<file disc="/Scene/UI/Race_J.szs" external="/mkwtm/UI/Race_J.szs" />
+		<file disc="/Scene/UI/Race_K.szs" external="/mkwtm/UI/Race_K.szs" />
+		<file disc="/Scene/UI/Race_M.szs" external="/mkwtm/UI/Race_M.szs" />
+		<file disc="/Scene/UI/Race_Q.szs" external="/mkwtm/UI/Race_Q.szs" />
+		<file disc="/Scene/UI/Race_S.szs" external="/mkwtm/UI/Race_S.szs" />
+		<file disc="/Scene/UI/Race_U.szs" external="/mkwtm/UI/Race_U.szs" />
+
+		<file disc="/Scene/UI/Title.szs" external="/mkwtm/UI/Title.szs" />
+		<file disc="/Scene/UI/Title_R.szs" external="/mkwtm/UI/Title.szs" />
+		<file disc="/Scene/UI/Title_E.szs" external="/mkwtm/UI/Message_E.szs" />
+		<file disc="/Scene/UI/Title_F.szs" external="/mkwtm/UI/Message_F.szs" />
+		<file disc="/Scene/UI/Title_G.szs" external="/mkwtm/UI/Message_G.szs" />
+		<file disc="/Scene/UI/Title_I.szs" external="/mkwtm/UI/Message_I.szs" />
+		<file disc="/Scene/UI/Title_J.szs" external="/mkwtm/UI/Message_J.szs" />
+		<file disc="/Scene/UI/Title_K.szs" external="/mkwtm/UI/Message_K.szs" />
+		<file disc="/Scene/UI/Title_M.szs" external="/mkwtm/UI/Message_M.szs" />
+		<file disc="/Scene/UI/Title_Q.szs" external="/mkwtm/UI/Message_Q.szs" />
+		<file disc="/Scene/UI/Title_S.szs" external="/mkwtm/UI/Message_S.szs" />
+		<file disc="/Scene/UI/Title_U.szs" external="/mkwtm/UI/Message_U.szs" />
+
+		<!--Code-->
+		<file disc="/rel/mkwtm_P.rel" external="/mkwtm/mkwtm_P.rel" create="true" />
+		<file disc="/rel/mkwtm_E.rel" external="/mkwtm/mkwtm_E.rel" create="true" />
+		<file disc="/rel/mkwtm_J.rel" external="/mkwtm/mkwtm_J.rel" create="true" />
+		<file disc="/rel/mkwtm_K.rel" external="/mkwtm/mkwtm_K.rel" create="true" />
+
+		<!--Loader-->
+		<memory valuefile="/mkwtm/loader.bin" offset="0x80004100" />
+		<!--RMCP--><memory offset="0x8000A290" value="4BFF9E71" original="4819D04D" />
+		<!--RMCE--><memory offset="0x8000A250" value="4BFF9EB1" original="4819CFED" />
+		<!--RMCJ--><memory offset="0x8000A1EC" value="4BFF9F15" original="4819D011" />
+		<!--RMCK--><memory offset="0x8000A398" value="4BFF9D69" original="4819D2A1" />
+	</patch>
+</wiidisc>
