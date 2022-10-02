@@ -174,7 +174,7 @@ public:
     u8 m_ghostCPUs[0x14];
 
     union {
-        u8 m_rkcData[0x4800] ATTRIBUTE_ALIGN(32);
+        u8 m_rkcData[0x5000] ATTRIBUTE_ALIGN(32);
         RKC::FileHeader m_rkc;
     };
 
