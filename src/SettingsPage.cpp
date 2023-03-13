@@ -35,16 +35,14 @@
 
 TYPEINFO_DERIVED(SettingsPage, UI::UIPage);
 
-enum Button
-{
+enum Button {
     BUTTON_RUMBLE = 0,
     BUTTON_GHOSTDATA = 1,
     BUTTON_LICENSE = 2,
     BUTTON_BACK = -100
 };
 
-enum
-{
+enum {
     MSG_GHOST_SAVE = 0x2801,
     MSG_GHOST_SAVE_WINDOW = 0x2802,
 
@@ -299,6 +297,14 @@ int SettingsGhostDataPage::getNextPageID()
     return m_nextPage;
 }
 
+void LicenseSettings_onButtonBackPress(UI::UIPage* page, UI::PushButton* button)
+{
+    UI::SceneBGMControllerInstance->enableBGMPersist();
+    // aka Options from License Settings
+    page->toNextScene(UI::SCENE_INSTALL_CHANNEL, UI::UIPage::SLIDE_BACK,
+                      button->getSelectDelay());
+}
+
 void LicenseSettings_onBackPress(UI::UIPage* page)
 {
     UI::SceneBGMControllerInstance->enableBGMPersist();
@@ -316,6 +322,7 @@ extern Instruction<1> Patch_LicenseSettingsBack;
 extern Instruction<1> Patch_LicenseSelectOptions;
 void SettingsPage::staticInit()
 {
-    Patch_LicenseSettingsBack.setB(LicenseSettings_onBackPress);
+    Patch_LicenseSettingsBack.setB(LicenseSettings_onButtonBackPress);
+    Patch_LicenseSettingsBack.setB(LicenseSettings_onBackPress, 0xB8 / 4);
     Patch_LicenseSelectOptions.setBL(LicenseSelect_optionsButton);
 }

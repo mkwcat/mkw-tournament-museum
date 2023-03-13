@@ -15,7 +15,7 @@ PAL	USA	JAP	KOR	Symbol
 805d1e00	80628468	805d16dc	805bff9c	Patch_WiiWheelOnlyPage
 805eb934	80632c0c	805eb210	805d9ad0	Patch_LicenseSelect
 805eadc8	806320a0	805ea6a4	805d8f64	Patch_LicenseSelectOptions
-805eddd4	806350ac	805ed6b0	805dbf70	Patch_LicenseSettingsBack
+805edd1c	80634ff4	805ed5f8	805dbeb8	Patch_LicenseSettingsBack
 8081d020	8080a274	8081c68c	8080b3e0	Patch_CharacterSelectUnlock
 8081cfb4	8080a208	8081c620	8080b374	Patch_VehicleSelectUnlock
 80622208	805f1354	80621954	80610600	Patch_BGUnloadSoundFix
