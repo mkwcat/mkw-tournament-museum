@@ -1,24 +1,6 @@
 // SelectionPage.cpp - Tournament select page
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "SelectionPage.h"
 #include "CompFile.h"
@@ -28,16 +10,14 @@
 
 TYPEINFO_DERIVED(SelectionPage, UI::UIPage);
 
-enum
-{
+enum {
     MSG_TOURNAMENTS_PAGE_TITLE = 0x27F0,
     MSG_TOURNAMENT_NUMBER_PAGE_TITLE = 0x27F1
 };
 
 namespace CompMode
 {
-enum E
-{
+enum E {
     TimeTrial,
     VSRace,
     SpecialTimeTrial,
@@ -56,64 +36,64 @@ struct CompNameData {
 };
 
 static const CompNameData compNameData[49] = {
-    /* c01 - c09 */
-    {Course::Mario_Circuit, CompMode::VSRace},
-    {Course::GBA_Battle_Course_3, CompMode::Gates},
-    {Course::Galaxy_Colosseum, CompMode::BossBattle},
-    {Course::Mushroom_Gorge, CompMode::TimeTrial},
-    {Course::Coconut_Mall, CompMode::Coins},
-    {Course::DS_Twilight_House, CompMode::VSRace},
-    {Course::N64_DKs_Jungle_Parkway, CompMode::BossRace},
-    {Course::Koopa_Cape, CompMode::Gates},
-    {Course::N64_Skyscraper, CompMode::SpecialTimeTrial},
+  /* c01 - c09 */
+  {Course::Mario_Circuit, CompMode::VSRace},
+  {Course::GBA_Battle_Course_3, CompMode::Gates},
+  {Course::Galaxy_Colosseum, CompMode::BossBattle},
+  {Course::Mushroom_Gorge, CompMode::TimeTrial},
+  {Course::Coconut_Mall, CompMode::Coins},
+  {Course::DS_Twilight_House, CompMode::VSRace},
+  {Course::N64_DKs_Jungle_Parkway, CompMode::BossRace},
+  {Course::Koopa_Cape, CompMode::Gates},
+  {Course::N64_Skyscraper, CompMode::SpecialTimeTrial},
 
-    /* c10 - c19 */
-    {Course::SNES_Mario_Circuit_3, CompMode::Coins},
-    {Course::Thwomp_Desert, CompMode::BossBattle},
-    {Course::Luigi_Circuit, CompMode::VSRace},
-    {Course::Maple_Treeway, CompMode::Coins},
-    {Course::N64_Mario_Raceway, CompMode::SpecialTimeTrial},
-    {Course::Warios_Gold_Mine, CompMode::BossRace},
-    {Course::DK_Summit, CompMode::Gates},
-    {Course::Toads_Factory, CompMode::TimeTrial},
-    {Course::Funky_Stadium, CompMode::Coins},
-    {Course::Block_Plaza, CompMode::TimeTrial},
+  /* c10 - c19 */
+  {Course::SNES_Mario_Circuit_3, CompMode::Coins},
+  {Course::Thwomp_Desert, CompMode::BossBattle},
+  {Course::Luigi_Circuit, CompMode::VSRace},
+  {Course::Maple_Treeway, CompMode::Coins},
+  {Course::N64_Mario_Raceway, CompMode::SpecialTimeTrial},
+  {Course::Warios_Gold_Mine, CompMode::BossRace},
+  {Course::DK_Summit, CompMode::Gates},
+  {Course::Toads_Factory, CompMode::TimeTrial},
+  {Course::Funky_Stadium, CompMode::Coins},
+  {Course::Block_Plaza, CompMode::TimeTrial},
 
-    /* c20 - c29 */
-    {Course::GBA_Bowser_Castle_3, CompMode::Gates},
-    {Course::SNES_Battle_Course_4, CompMode::Coins},
-    {Course::N64_Bowsers_Castle, CompMode::BossRace},
-    {Course::GCN_Waluigi_Stadium, CompMode::Gates},
-    {Course::DS_Peach_Gardens, CompMode::SpecialTimeTrial},
-    {Course::Sunset_Luigi_Circuit, CompMode::VSRace},
-    {Course::Chain_Chomp_Roulette, CompMode::Coins},
-    {Course::Grumble_Volcano, CompMode::TimeTrial},
-    {Course::Galaxy_Colosseum, CompMode::BossBattle},
-    {Course::GCN_Peach_Beach, CompMode::Coins},
+  /* c20 - c29 */
+  {Course::GBA_Bowser_Castle_3, CompMode::Gates},
+  {Course::SNES_Battle_Course_4, CompMode::Coins},
+  {Course::N64_Bowsers_Castle, CompMode::BossRace},
+  {Course::GCN_Waluigi_Stadium, CompMode::Gates},
+  {Course::DS_Peach_Gardens, CompMode::SpecialTimeTrial},
+  {Course::Sunset_Luigi_Circuit, CompMode::VSRace},
+  {Course::Chain_Chomp_Roulette, CompMode::Coins},
+  {Course::Grumble_Volcano, CompMode::TimeTrial},
+  {Course::Galaxy_Colosseum, CompMode::BossBattle},
+  {Course::GCN_Peach_Beach, CompMode::Coins},
 
-    /* c30 - c39 */
-    {Course::DS_Yoshi_Falls, CompMode::VSRace},
-    {Course::GBA_Shy_Guy_Beach, CompMode::EnemyScore},
-    {Course::Bowsers_Castle, CompMode::TimeTrial},
-    {Course::GCN_Cookie_Land, CompMode::VSRace},
-    {Course::GCN_Mario_Circuit, CompMode::SpecialTimeTrial},
-    {Course::Daisy_Circuit, CompMode::Gates},
-    {Course::Dry_Dry_Ruins, CompMode::VSRace},
-    {Course::Rainbow_Road, CompMode::SpecialTimeTrial},
-    {Course::DS_Desert_Hills, CompMode::EnemyScore},
-    {Course::Delfino_Pier, CompMode::SpecialTimeTrial},
+  /* c30 - c39 */
+  {Course::DS_Yoshi_Falls, CompMode::VSRace},
+  {Course::GBA_Shy_Guy_Beach, CompMode::EnemyScore},
+  {Course::Bowsers_Castle, CompMode::TimeTrial},
+  {Course::GCN_Cookie_Land, CompMode::VSRace},
+  {Course::GCN_Mario_Circuit, CompMode::SpecialTimeTrial},
+  {Course::Daisy_Circuit, CompMode::Gates},
+  {Course::Dry_Dry_Ruins, CompMode::VSRace},
+  {Course::Rainbow_Road, CompMode::SpecialTimeTrial},
+  {Course::DS_Desert_Hills, CompMode::EnemyScore},
+  {Course::Delfino_Pier, CompMode::SpecialTimeTrial},
 
-    /* c40 - c49 */
-    {Course::GCN_DK_Mountain, CompMode::Gates},
-    {Course::N64_Sherbet_Land, CompMode::VSRace},
-    {Course::Mario_Circuit, CompMode::EnemyScore},
-    {Course::Luigi_Circuit, CompMode::VSRace},
-    {Course::GCN_Peach_Beach, CompMode::SpecialTimeTrial},
-    {Course::Moonview_Highway, CompMode::TimeTrial},
-    {Course::DS_Delfino_Square, CompMode::TimeTrial},
-    {Course::Mario_Circuit, CompMode::VSRace},
-    {Course::N64_Bowsers_Castle, CompMode::BossRace},
-    {Course::Galaxy_Colosseum, CompMode::BossBattle},
+  /* c40 - c49 */
+  {Course::GCN_DK_Mountain, CompMode::Gates},
+  {Course::N64_Sherbet_Land, CompMode::VSRace},
+  {Course::Mario_Circuit, CompMode::EnemyScore},
+  {Course::Luigi_Circuit, CompMode::VSRace},
+  {Course::GCN_Peach_Beach, CompMode::SpecialTimeTrial},
+  {Course::Moonview_Highway, CompMode::TimeTrial},
+  {Course::DS_Delfino_Square, CompMode::TimeTrial},
+  {Course::Mario_Circuit, CompMode::VSRace},
+  {Course::N64_Bowsers_Castle, CompMode::BossRace},
+  {Course::Galaxy_Colosseum, CompMode::BossBattle},
 };
 
 static inline int compExplanationMid(int compId)
@@ -122,11 +102,11 @@ static inline int compExplanationMid(int compId)
 }
 
 SelectionPage::SelectionPage()
-    : mf_imp_onSelectEvent(this, &SelectionPage::onSelectEvent),
-      mf_imp_onFreeToSelectEvent(this, &SelectionPage::onFreeToSelectEvent),
-      mf_imp_onBackEvent(this, &SelectionPage::onBackEvent),
-      mf_imp_onArrowRightEvent(this, &SelectionPage::onArrowRightEvent),
-      mf_imp_onArrowLeftEvent(this, &SelectionPage::onArrowLeftEvent)
+  : mf_imp_onSelectEvent(this, &SelectionPage::onSelectEvent)
+  , mf_imp_onFreeToSelectEvent(this, &SelectionPage::onFreeToSelectEvent)
+  , mf_imp_onBackEvent(this, &SelectionPage::onBackEvent)
+  , mf_imp_onArrowRightEvent(this, &SelectionPage::onArrowRightEvent)
+  , mf_imp_onArrowLeftEvent(this, &SelectionPage::onArrowLeftEvent)
 {
     m_nextPage = -1;
 }
@@ -193,6 +173,7 @@ int SelectionPage::buttonCompId(int buttonId)
 {
     return m_pageNum * 10 + buttonId;
 }
+
 int SelectionPage::compIdButton(int compId)
 {
     return compId % 10;

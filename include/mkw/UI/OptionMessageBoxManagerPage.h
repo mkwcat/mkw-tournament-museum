@@ -1,25 +1,7 @@
 // OptionMessageBoxManagerPage.h - Manages the messages and prompts for the
 // options menu
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 #include "Function.h"
@@ -55,12 +37,11 @@ public:
 protected:
     /* 0x80600F88 */
     /* 0x44 */ FunctionImp<OptionMessageBoxManagerPage, int, int>
-        m_ptr_event0x44;
+      m_ptr_event0x44;
     /* 0x58 */ UIInputManager m_inputs;
 
 public:
-    enum Option
-    {
+    enum Option {
         OPTION_RUMBLE = 0,
         OPTION_REGION_PROFILE = 1,
         OPTION_MESSAGE_DELIVERY = 2,
@@ -68,12 +49,14 @@ public:
         OPTION_DATA_EXCHANGE = 4,
         OPTION_OTHERS_MIIS = 5,
     };
+
     /* 0x68 */ int m_option;
 
     /* 0x6C */ int unk_0x6C; // probably nwc24 related
     /* 0x70 */ int m_nextPage;
     /* 0x74 */ int unk_0x74;
 };
+
 static_assert(sizeof(OptionMessageBoxManagerPage) == 0x78,
               "sizeof(OptionMessageBoxManagerPage) != 0x78");
 

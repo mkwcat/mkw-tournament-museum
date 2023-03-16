@@ -1,53 +1,36 @@
 // RaceMenu.cpp - Pause menu and end screens
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "RaceMenu.h"
 #include "CompFile.h"
 #include "Replay.h"
 #include "UI.h"
 #include "patch.h"
+#include <asm.h>
 #include <mkw/MenuSet.h>
 #include <mkw/UI/RaceHudPage.h>
 #include <mkw/UI/RaceMenuPage.h>
 #include <mkw/UI/UIPage.h>
-#include <asm.h>
 
 const int sEndScreenButtons[5] = {
-    UI::RaceMenu::ButtonRestart,       UI::RaceMenu::ButtonChangeCharacter,
-    UI::RaceMenu::ButtonChangeMission, UI::RaceMenu::ButtonQuit,
-    UI::RaceMenu::ButtonReplay,
+  UI::RaceMenu::ButtonRestart,       UI::RaceMenu::ButtonChangeCharacter,
+  UI::RaceMenu::ButtonChangeMission, UI::RaceMenu::ButtonQuit,
+  UI::RaceMenu::ButtonReplay,
 };
 const int sPauseScreenButtons[5] = {
-    UI::RaceMenu::ButtonContinue,
-    UI::RaceMenu::ButtonRestart,
-    UI::RaceMenu::ButtonChangeCharacter,
-    UI::RaceMenu::ButtonChangeMission,
-    UI::RaceMenu::ButtonQuit,
+  UI::RaceMenu::ButtonContinue,
+  UI::RaceMenu::ButtonRestart,
+  UI::RaceMenu::ButtonChangeCharacter,
+  UI::RaceMenu::ButtonChangeMission,
+  UI::RaceMenu::ButtonQuit,
 };
 
 class EventAfterMenuPage : public UI::RaceMenuPage
 {
 public:
-    EventAfterMenuPage() : m_340(0)
+    EventAfterMenuPage()
+      : m_340(0)
     {
     }
 
@@ -82,12 +65,14 @@ public:
 public:
     INSTANTIATE_TYPEINFO;
 };
+
 TYPEINFO_DERIVED(EventAfterMenuPage, UI::RaceMenuPage);
 
 class EventPauseMenuPage : public UI::RaceMenuPage
 {
 public:
-    EventPauseMenuPage() : m_340(0)
+    EventPauseMenuPage()
+      : m_340(0)
     {
     }
 
@@ -122,6 +107,7 @@ public:
 public:
     INSTANTIATE_TYPEINFO;
 };
+
 TYPEINFO_DERIVED(EventPauseMenuPage, UI::RaceMenuPage);
 
 class ReplayHud : public UI::RaceHudPage
@@ -178,6 +164,7 @@ public:
 public:
     INSTANTIATE_TYPEINFO;
 };
+
 TYPEINFO_DERIVED(ReplayHud, UI::RaceHudPage);
 
 void buildTournamentPages(UI::UIPageManager* scene)
@@ -214,7 +201,7 @@ void buildTournamentReplayPages(UI::UIPageManager* scene)
 }
 
 ASM_FUNCTION(void hudWatchReplayHook(),
-    // clang-format off
+             // clang-format off
     li      R4, -1;
 
     cmpwi   R0, 0x2D;
@@ -222,21 +209,18 @@ ASM_FUNCTION(void hudWatchReplayHook(),
 
     li      R4, TOURNAMENT_SCENE_ID;
     blr;
-    // clang-format on
+             // clang-format on
 )
 
 ASM_FUNCTION(void hudQuitReplayHook(),
-    // case 0x2F
-    li      R4, 0x21;
-    beqlr-;
+             // case 0x2F
+             li R4, 0x21;
+             beqlr - ;
 
-    cmpwi   R0, TOURNAMENT_SCENE_ID;
-    li      R4, 0x26;
-    beqlr-;
+             cmpwi R0, TOURNAMENT_SCENE_ID; li R4, 0x26; beqlr - ;
 
-    li      R4, -1;
-    blr;
-    // clang-format on
+             li R4, -1; blr;
+             // clang-format on
 )
 
 int resultMusicHook(int bgmId)
@@ -265,6 +249,7 @@ extern Instruction<24> Patch_ChangeMissionCase;
 extern Instruction<1> Patch_HudWatchReplayCase;
 extern Instruction<4> Patch_QuitReplayCase;
 extern Instruction<1> Patch_ResultMusic;
+
 void initRaceMenu()
 {
     Patch_ChangeMissionCase.m_instr[8] = 0x38800000 | 0x85;

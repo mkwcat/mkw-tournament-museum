@@ -1,25 +1,7 @@
 // ForcedHandleBypassPage.cpp - Confirm page that appears when attempting to use
 // the wrong controller on a Wii Wheel only tournament
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "ForcedHandleBypassPage.h"
 #include "CompFile.h"
@@ -29,7 +11,7 @@
 TYPEINFO_DERIVED(ForcedHandleBypassPage, UI::UIPage);
 
 ForcedHandleBypassPage::ForcedHandleBypassPage()
-    : mf_imp_selectYes(this, &ForcedHandleBypassPage::selectYes)
+  : mf_imp_selectYes(this, &ForcedHandleBypassPage::selectYes)
 {
     m_noResume = false;
     m_wiiWheelPageDisabled = false;
@@ -50,8 +32,8 @@ void ForcedHandleBypassPage::onInit()
 void ForcedHandleBypassPage::onIn()
 {
     UI::MessageConfirmPopupPage* msgPage =
-        RuntimeTypeInfo::cast<UI::MessageConfirmPopupPage*>(
-            RKContext::sInstance->m_scene->getPage(0x4E));
+      RuntimeTypeInfo::cast<UI::MessageConfirmPopupPage*>(
+        RKContext::sInstance->m_scene->getPage(0x4E));
 
     msgPage->configMessage(0x2800, nullptr);
     msgPage->configOption(0, 0xFAC, nullptr, 1, &mf_imp_selectYes);
@@ -75,7 +57,7 @@ void ForcedHandleBypassPage::selectYes(UI::MessageConfirmPopupPage* page,
     }
 
     f32 delay = button->getSelectDelay();
-    RKContext::sInstance->startSceneTransition((int)delay, 0x000000FF);
+    RKContext::sInstance->startSceneTransition((int) delay, 0x000000FF);
 
     UI::UIPage* lastPage = RKContext::sInstance->m_scene->getPage(0xBA);
     lastPage->toOut(UI::UIPage::SLIDE_FORWARD, delay);
@@ -99,15 +81,16 @@ void ForcedHandleBypassPage::onChildPageOut()
 int ForcedHandleBypassPage::isWiiWheelPageDisabled()
 {
     ForcedHandleBypassPage* page =
-        RuntimeTypeInfo::cast<ForcedHandleBypassPage*>(
-            RKContext::sInstance->m_scene->getPage(0x87));
+      RuntimeTypeInfo::cast<ForcedHandleBypassPage*>(
+        RKContext::sInstance->m_scene->getPage(0x87));
     return page->m_wiiWheelPageDisabled;
 }
+
 void ForcedHandleBypassPage::setWiiWheelPageDisabled(bool set)
 {
     ForcedHandleBypassPage* page =
-        RuntimeTypeInfo::cast<ForcedHandleBypassPage*>(
-            RKContext::sInstance->m_scene->getPage(0x87));
+      RuntimeTypeInfo::cast<ForcedHandleBypassPage*>(
+        RKContext::sInstance->m_scene->getPage(0x87));
     page->m_wiiWheelPageDisabled = set;
 }
 
@@ -121,6 +104,7 @@ void wiiWheelPageRejectController(UI::UIPage* page)
 }
 
 extern Instruction<11> Patch_WiiWheelOnlyPage;
+
 void ForcedHandleBypassPage::staticInit()
 {
     Patch_WiiWheelOnlyPage.setBL(wiiWheelPageRejectController);

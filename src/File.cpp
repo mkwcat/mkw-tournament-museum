@@ -1,24 +1,6 @@
 // File.cpp - NAND / Riivo file I/O
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "File.h"
 #include <rvl/ipc.h>
@@ -298,8 +280,8 @@ void RiivoFS::getShortPath(const char* inPath, char* out)
 bool RiivoFS::dirExists(const char* path)
 {
     s32 ret =
-        IOS_Ioctl(m_fd, IOCTL_OpenDir, reinterpret_cast<const void*>(path),
-                  strlen(path) + 1, nullptr, 0);
+      IOS_Ioctl(m_fd, IOCTL_OpenDir, reinterpret_cast<const void*>(path),
+                strlen(path) + 1, nullptr, 0);
     if (ret >= 0) {
         IOS_Ioctl(m_fd, IOCTL_CloseDir, reinterpret_cast<const void*>(&ret),
                   sizeof(ret), nullptr, 0);

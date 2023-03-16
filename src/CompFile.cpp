@@ -1,24 +1,6 @@
 // CompFile.cpp - Competition file reader and save data manager
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "CompFile.h"
 #include "util.h"
@@ -110,8 +92,8 @@ void CompFile::readFile()
     }
     if (fileSize > sizeof(m_rkcData)) {
         OSReport(
-            "ERROR: Competition file is too big to fit in buffer! (id %d)\n",
-            m_compId);
+          "ERROR: Competition file is too big to fit in buffer! (id %d)\n",
+          m_compId);
         return;
     }
 
@@ -280,7 +262,7 @@ static char getFilenameChar(wchar_t wc)
         return '_';
 
     default:
-        return (char)wc;
+        return (char) wc;
     }
 }
 
@@ -294,7 +276,7 @@ static char getFilenameCharRestricted(wchar_t wc)
     case '-':
     case '_':
     case '\'':
-        return (char)wc;
+        return (char) wc;
 
     default:
         return '_';
@@ -318,8 +300,8 @@ void CompFile::getGhostDataPath(char* path, u32 num, bool restrictMii)
         // Wont save on real console because the filename is greater than 12
         // characters
         const char* format = num == 0
-                                 ? "%s/comp%02u - %02um%02us%03um.rkg"
-                                 : "%s/comp%02u - %02um%02us%03um - %u.rkg";
+                               ? "%s/comp%02u - %02um%02us%03um.rkg"
+                               : "%s/comp%02u - %02um%02us%03um - %u.rkg";
 
         snprintf(path, 128, format, savePathRoot(), m_compId,
                  m_ghost.m_finishTime.minutes, m_ghost.m_finishTime.seconds,
@@ -329,8 +311,8 @@ void CompFile::getGhostDataPath(char* path, u32 num, bool restrictMii)
 #endif
 
     const char* format =
-        num == 0 ? "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um.rkg"
-                 : "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um - %u.rkg";
+      num == 0 ? "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um.rkg"
+               : "%s/comp%02u/comp%02u - %.10s - %02um %02us %03um - %u.rkg";
 
     snprintf(path, 128, format, savePathRoot(), m_compId, m_compId,
              asciiMiiName, m_ghost.m_finishTime.minutes,
@@ -690,6 +672,7 @@ extern Instruction<1> Patch_Nwc24DlManager_InsertTimeInLdb;
 extern Instruction<1> Patch_Nwc24DlManager_GetLdbEntry;
 extern Instruction<1> Patch_SaveTournamentGhost;
 extern Instruction<1> Patch_NoRandomFinishTime;
+
 void initCompFilePatches()
 {
     Patch_Nwc24DlManager_init.setBlr();

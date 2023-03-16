@@ -1,24 +1,6 @@
 // CompFile.h - Competition file reader and save data manager
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 #include "File.h"
@@ -43,12 +25,13 @@ struct FileObjective {
     u8 engineClass;
     u8 lapCount;
     u8 pad_0x9;
-    enum
-    {
+
+    enum {
         RESTRICTION_KARTS_ONLY,
         RESTRICTION_BIKES_ONLY,
         RESTRICTION_NONE
     };
+
     u16 vehicleRestriction;
     u16 cameraAngle;
     u16 minimapObject;
@@ -67,6 +50,7 @@ struct FileObjective {
     u8 pad_0x38[2];
     u16 checksum;
 };
+
 static_assert(sizeof(FileObjective) == 0x3C, "sizeof(FileObjective) != 0x3C");
 
 struct FileHeader {
@@ -76,6 +60,7 @@ struct FileHeader {
     u32 unknown;
     FileObjective objective;
 };
+
 static_assert(sizeof(FileHeader) == 0x4C, "sizeof(FileHeader) != 0x4C");
 
 } // namespace RKC
@@ -102,8 +87,7 @@ struct CompSaveFile {
     } __attribute__((packed));
 
     struct Data {
-        enum GhostSaveMode
-        {
+        enum GhostSaveMode {
             GHOST_SAVE_ALL = 0,
             GHOST_SAVE_BEST_TIME = 1,
             GHOST_SAVE_NONE = 2
@@ -179,8 +163,7 @@ public:
     };
 
 public:
-    enum SaveError
-    {
+    enum SaveError {
         SAVE_WAITING = 0,
         SAVE_OK = 1,
         SAVE_EUNKNOWN = 2,
@@ -191,6 +174,7 @@ public:
         SAVE_EFORMAT = 7,
         SAVE_EIPC = 8
     };
+
     SaveError m_saveDataStatus;
     s32 m_saveFsError;
     SaveError m_ghostDataStatus;

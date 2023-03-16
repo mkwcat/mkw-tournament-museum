@@ -1,3 +1,7 @@
+// Random.h - Mario Kart Wii random class
+//
+// SPDX-License-Identifier: MIT
+
 // from SeekyCt/mkw-structures
 // Documentation credit: Kevin
 

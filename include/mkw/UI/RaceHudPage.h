@@ -1,24 +1,6 @@
 // RaceHudPage.h - Race HUD base page
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 #include "UIInputManager.h"
@@ -33,6 +15,7 @@ class RaceHudPage : public UIPage
 public:
     /* 0x80624764 */
     virtual ~RaceHudPage();
+
     RaceHudPage()
     {
     }
@@ -55,9 +38,14 @@ public:
 
     struct UnknownMember {
         UnknownMember()
-            : unk_0x4C(0), unk_0x4E(0), unk_0x50(0), unk_0x54(0), unk_0x64(0)
+          : unk_0x4C(0)
+          , unk_0x4E(0)
+          , unk_0x50(0)
+          , unk_0x54(0)
+          , unk_0x64(0)
         {
         }
+
         virtual ~UnknownMember();
 
         u16 unk_0x4C;
@@ -79,6 +67,7 @@ public:
 
     INSTANTIATE_TYPEINFO;
 };
+
 static_assert(sizeof(RaceHudPage) == 0x1DC, "sizeof(RaceHudPage) != 0x1DC");
 
 } // namespace UI

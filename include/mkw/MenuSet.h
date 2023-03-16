@@ -1,24 +1,6 @@
 // MenuSet.h - MenuSet/RaceData implementation
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 #include "GhostData.h"
@@ -45,8 +27,7 @@ public:
 };
 
 struct MissionSetting {
-    enum GameMode
-    {
+    enum GameMode {
         MODE_Miniturbo = 0,
         MODE_LapRun01 = 1,
         MODE_LapRun02 = 2,
@@ -87,6 +68,7 @@ struct MissionSetting {
     /* 0x58 */ u16 cpuCount;
     /* 0x5A */ u8 cpu[22];
 };
+
 static_assert(sizeof(MissionSetting) == 0x70, "sizeof(MissionSetting) != 0x70");
 
 class MenuSet : public ParamFile
@@ -113,8 +95,7 @@ public:
         /* 0x8052DAF0 */
         u32 computeGpRank();
 
-        enum PlayerType
-        {
+        enum PlayerType {
             PLAYER_REAL_LOCAL,
             PLAYER_CPU,
             PLAYER_UNKNOWN2,
@@ -123,8 +104,7 @@ public:
             PLAYER_NONE
         };
 
-        enum Team
-        {
+        enum Team {
             TEAM_RED,
             TEAM_BLUE
         };
@@ -148,6 +128,7 @@ public:
         /* 0xE8 */ u16 rating; // online VR/BR
         /* 0xEA - 0xF0 */ u8 fill_0xEA[0xF0 - 0xEA];
     };
+
     static_assert(sizeof(Player) == 0xF0, "sizeof(Player) != 0xF0");
 
     class RaceSetting
@@ -160,8 +141,7 @@ public:
         /* 0x8052ED28 */
         void setupNextRaceInput(const RaceSetting* lastRace);
 
-        enum EngineClass
-        {
+        enum EngineClass {
             CC_50 = 0,
             CC_100 = 1,
             CC_150 = 2,
@@ -170,8 +150,7 @@ public:
             CC_BATTLE = 3
         };
 
-        enum GameMode
-        {
+        enum GameMode {
             MODE_GRAND_PRIX = 0,
             MODE_VS_RACE = 1,
             MODE_TIME_TRIAL = 2,
@@ -187,30 +166,26 @@ public:
             MODE_CREDITS = 12
         };
 
-        enum BattleMode
-        {
+        enum BattleMode {
             BATTLE_BALLOON = 0,
             BATTLE_COIN = 1
         };
 
-        enum CpuSetting
-        {
+        enum CpuSetting {
             CPU_EASY = 0,
             CPU_NORMAL = 1,
             CPU_HARD = 2,
             CPU_NONE = 3
         };
 
-        enum ItemSetting
-        {
+        enum ItemSetting {
             ITEM_BALANCED = 0,
             ITEM_FRANTIC = 1,
             ITEM_STRATEGIC = 2,
             ITEM_NONE = 3
         };
 
-        enum ModeFlags
-        {
+        enum ModeFlags {
             FLAG_MIRROR = 1 << 0,
             FLAG_TEAMS = 1 << 1,
             FLAG_TOURNAMENT = 1 << 2
@@ -243,6 +218,7 @@ public:
         /* 0xB7C */ MissionSetting mission;
         /* 0xBEC */ GhostData* ghost;
     };
+
     static_assert(sizeof(RaceSetting) == 0xBF0, "sizeof(RaceSetting) != 0xBF0");
 
     /* 0x001C */ const u8* unk_0x1C;
@@ -253,6 +229,7 @@ public:
 
     /* 0x23F0 */ GhostData::RKGFile ghosts[2];
 };
+
 static_assert(sizeof(MenuSet) == 0x73F0, "sizeof(MenuSet) != 0x73F0");
 
 // hack for asm blocks

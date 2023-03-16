@@ -1,24 +1,6 @@
 // SettingsPage.h - Tournament settings menu
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 #include <mkw/UI/CtrlMenuBackButton.h>
@@ -63,7 +45,7 @@ protected:
     UI::FunctionImp<SettingsPage, UI::PushButton*, int> m_fun_onButtonSelect;
     UI::FunctionImp<SettingsPage, int, int> m_fun_onBackPress;
     UI::FunctionImp<SettingsPage, UI::MessageWindowPage*, int>
-        m_fun_messageWindowEvent;
+      m_fun_messageWindowEvent;
 
     int m_nextPage;
 
@@ -87,9 +69,9 @@ public:
     void onBackPress(int r4, int r5);
 
     UI::FunctionImp<SettingsGhostDataPage, UI::MessageWindowPage*, int>
-        m_fun_windowOut;
+      m_fun_windowOut;
     UI::FunctionImp<SettingsGhostDataPage, UI::PushButton*, int>
-        m_fun_onButtonSelect;
+      m_fun_onButtonSelect;
     UI::FunctionImp<SettingsGhostDataPage, int, int> m_fun_onBackPress;
 
     UI::UIInputManagerMenu m_inputs;

@@ -1,24 +1,6 @@
 // UI.cpp - Manage scene and patch UI
 //
-// Copyright (c) 2021 TheLordScruffy
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+// SPDX-License-Identifier: MIT
 
 #include "UI.h"
 #include "ForcedHandleBypassPage.h"
@@ -2662,6 +2644,7 @@ s32 sceneGetBGMReplace(int id)
         return -1;
     }
 }
+
 s32 sceneGetBGMGroupReplace(int id)
 {
     switch (id) {
@@ -2735,7 +2718,7 @@ void initMenu()
     if (getRegionChar() == 'E') {
         // Skip ESRB screen patch for NTSC-U
         Instruction<1>* esrbPatch =
-            reinterpret_cast<Instruction<1>*>(0x8060409C);
+          reinterpret_cast<Instruction<1>*>(0x8060409C);
         esrbPatch->m_instr[0] = 0x38600001;
         esrbPatch->flush();
     }
@@ -2764,11 +2747,11 @@ void initMenu()
     Patch_SceneGetBGMGroup.setB(sceneGetBGMGroupReplace);
 
     Patch_EventExplanationPage_Events.m_instr[2] =
-        reinterpret_cast<u32>(&eventExplanationSelectEvent);
+      reinterpret_cast<u32>(&eventExplanationSelectEvent);
     Patch_EventExplanationPage_Events.m_instr[5] =
-        reinterpret_cast<u32>(&eventExplanationBackEvent);
+      reinterpret_cast<u32>(&eventExplanationBackEvent);
     Patch_EventExplanationPage_vtable.m_instr[4] =
-        reinterpret_cast<u32>(&eventExplanationGetNextPage);
+      reinterpret_cast<u32>(&eventExplanationGetNextPage);
     Patch_EventExplanationPage_Events.flush();
     Patch_EventExplanationPage_vtable.flush();
 
