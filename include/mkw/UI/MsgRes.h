@@ -11,11 +11,14 @@ namespace UI
 class MsgRes
 {
 public:
-    // This is probably not here
     struct FormatParam {
-        int intParam;
-        int intParam2;
-        u8 fill[0xC0];
+        s32 intVals[9];
+        u32 messageIds[9];
+        const void* miis[9];
+        u8 licenseIds[9];
+        u32 playerIds[9];
+        const wchar_t* strings[9];
+        u32 unk_0xC0;
     };
 
     void* m_data;

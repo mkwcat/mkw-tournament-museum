@@ -112,6 +112,11 @@ void CompFile::setupLeaderboard()
     m_leaderboard = &getLicenseSaveData()->ldb[ldbEntryIndex(m_compId)];
 }
 
+CompSaveFile::LdbEntry* CompFile::getLeaderboard(u32 compId)
+{
+    return &getLicenseSaveData()->ldb[ldbEntryIndex(compId)];
+}
+
 static const char* savePathRoot()
 {
     if (isRiivolution())

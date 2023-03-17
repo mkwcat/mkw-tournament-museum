@@ -122,6 +122,7 @@ public:
 
     void readFile();
     void setupLeaderboard();
+    CompSaveFile::LdbEntry* getLeaderboard(u32 compId);
     void getSaveDataPath(char* path);
     void getGhostDataPath(char* path, u32 num, bool restrictMii);
     void getGhostDataDir(char* path, int compId);

@@ -117,9 +117,9 @@ SelectionPage::~SelectionPage()
 
 void SelectionPage::updatePageNumText()
 {
-    UI::MsgRes::FormatParam param;
-    param.intParam = m_pageNum + 1;
-    param.intParam2 = 5;
+    UI::MsgRes::FormatParam param = {};
+    param.intVals[0] = m_pageNum + 1;
+    param.intVals[1] = 5;
     m_pageNumControl.setMessage(0x7D9, &param);
 }
 
@@ -129,8 +129,8 @@ void SelectionPage::updateButtonTexture()
         char texture[16];
         snprintf(texture, 16, "comp%02d", buttonCompId(i));
         m_buttons[i].setTexture("chara", texture);
-        UI::MsgRes::FormatParam param;
-        param.intParam = buttonCompId(i);
+        UI::MsgRes::FormatParam param = {};
+        param.intVals[0] = buttonCompId(i);
 
         if (buttonCompId(i) == 0) {
             m_buttons[i].setMessage(0, nullptr);
@@ -149,6 +149,9 @@ void SelectionPage::updateCompetitionName()
         m_compName.setMessage("mode_text", 0x27F3, 0);
         m_compName.setMessage("mode_text_shadow", 0x27F3, 0);
 
+        m_compName.setMessage("time_text", 0x27F3, 0);
+        m_compName.setMessage("time_text_shadow", 0x27F3, 0);
+
         m_compName.setTexture("course_bg", "comp_settings");
         return;
     }
@@ -163,6 +166,28 @@ void SelectionPage::updateCompetitionName()
 
     m_compName.setMessage("mode_text", 0x27D8 + data->mode, 0);
     m_compName.setMessage("mode_text_shadow", 0x27D8 + data->mode, 0);
+
+    UI::MsgRes::FormatParam param = {};
+    CompSaveFile::LdbEntry* ldb =
+      CompFile::sInstance->getLeaderboard(m_selectedCompId);
+
+    if (ldb == nullptr || !ldb[0].isEnabled) {
+        param.messageIds[0] = 0x17A5;
+    } else {
+        param.messageIds[0] = 0x17A4;
+        if (ldb[0].minutes < 10) {
+            param.intVals[0] = ldb[0].minutes;
+            param.intVals[1] = ldb[0].seconds;
+            param.intVals[2] = ldb[0].milliseconds;
+        } else {
+            param.intVals[0] = 99;
+            param.intVals[1] = 59;
+            param.intVals[2] = 999;
+        }
+    }
+
+    m_compName.setMessage("time_text", 0xD22, &param);
+    m_compName.setMessage("time_text_shadow", 0xD22, &param);
 
     char texture[16];
     snprintf(texture, 16, "id%02d", data->course);
